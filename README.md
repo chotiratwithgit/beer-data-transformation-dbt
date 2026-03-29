@@ -11,7 +11,7 @@ The pipeline is designed with a modern data stack (MDS) approach:
 5. **Visualization**: Power BI Desktop connects directly to Supabase for real-time insights.
 
 ##   Dashboard Preview
-![Dashboard Screenshot](./dashboard/dashboard.jpg)
+![Dashboard Screenshot](./dashboard/dashboard.png)
 *Insights: Analysis of 200 breweries across 54 states/territories, categorized by brewery type.*
 
 ##  Tech Stack
