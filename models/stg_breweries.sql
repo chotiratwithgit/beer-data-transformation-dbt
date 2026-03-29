@@ -1,18 +1,18 @@
--- 1. บังคับให้สร้างเป็นตาราง และระบุ Schema ให้ชัดเจน
+--Force it to be created as a table and clearly specify the schema
 {{ config(
     materialized='table'
 ) }}
 
--- 2. ดึงข้อมูลจากตารางดิบ
+-- select data from raw table
 with source_data as (
-    -- ใช้คำสั่ง select ปกติไปก่อนเพื่อทดสอบความชัวร์
+    
     select * from public.breweries
 )
 
--- 3. ปรุงข้อมูล
+-- Adjust the data to be consistent
 select
     id,
-    upper(name) as brewery_name,
+    upper(name) as brewery_name, -- Transform all characters to uppercase
     brewery_type,
     city,
     coalesce(state, 'N/A') as state_name,
