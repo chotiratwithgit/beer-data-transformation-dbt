@@ -2,11 +2,24 @@
 
 This project demonstrates a complete **Data Engineering & Analytics pipeline**, focusing on transforming raw brewery data into clean, business-ready insights using modern data stack tools.
 
+##   Architecture Overview
+The pipeline is designed with a modern data stack (MDS) approach:
+1. **Extraction**: Python scripts fetch data from Open Brewery DB API.
+2. **Orchestration**: GitHub Actions schedules daily runs.
+3. **Storage**: Raw data is staged in AWS S3 and loaded into Supabase (PostgreSQL).
+4. **Transformation**: dbt Cloud handles data cleaning and modeling (e.g., renaming, formatting).
+5. **Visualization**: Power BI Desktop connects directly to Supabase for real-time insights.
+
+##   Dashboard Preview
+![Dashboard Screenshot](./dashboard/dashboard_v1.jpg)
+*Insights: Analysis of 200 breweries across 54 states/territories, categorized by brewery type.*
+
 ##  Tech Stack
+* **Languages**: Python, SQL
+* **Tools**: dbt Cloud, GitHub Actions, Power BI
 * **Data Source:** Open Brewery DB
 * **Data Warehouse:** [Supabase](https://supabase.com/) (PostgreSQL)
 * **Transformation Tool:** [dbt Cloud](https://www.getdbt.com/)
-* **Visualization:** [Power BI](https://powerbi.microsoft.com/)
 * **Version Control:** GitHub
 
 ##  Data Transformation Workflow
