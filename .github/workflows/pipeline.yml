@@ -1,0 +1,39 @@
+name: Daily Brewery Data Pipeline
+
+# create a workflow that runs every day at 8 AM Thailand time (UTC+7)
+on:
+  schedule:
+   
+    - cron: '0 1 * * *' 
+  workflow_dispatch: # manually trigger
+
+jobs:
+  run-data-pipeline:
+    runs-on: ubuntu-latest # use the latest version of Ubuntu runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas boto3 requests fsspec s3fs pyarrow python-dotenv psycopg2-binary fastparquet
+
+      - name: Run Pipeline Scripts
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python getAPI.py
+          python jsontocsv.py
+          python load_to_cloud.py
+          python load_to_db.py
+      
+      
